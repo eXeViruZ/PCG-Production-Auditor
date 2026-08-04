@@ -76,7 +76,9 @@ For the complete first-use workflow, see [02 — Quick Start](PCGProductionAudit
 
 ## Support
 
-For setup questions, bug reports, feature requests, and product support, join the [Hanke Unreal Tools Discord](https://discord.gg/vgpmnN6nCR).
+Use the [Hanke Unreal Tools Discord](https://discord.gg/vgpmnN6nCR) for setup questions, bug reports, feature requests, and community support.
+
+For direct or individual support, contact [Tom.Hanke.Official@web.de](mailto:Tom.Hanke.Official@web.de).
 
 ## Copyright
 
