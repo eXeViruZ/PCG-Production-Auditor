@@ -1,205 +1,82 @@
 # PCG Production Auditor
 
-PCG Production Auditor is an editor-only C++ plugin for Unreal Engine 5.8 that audits native PCG Graphs and PCG Components for configuration, structure, organization, and workflow issues.
+PCG Production Auditor provides a production-ready quality-control workflow for Unreal Engine's native PCG framework. It audits PCG Graphs and level-side PCG Components, presents structured findings with practical recommendations, and helps developers review procedural setups before configuration problems become difficult to trace.
 
-The plugin provides a dedicated editor interface with categorized findings, direct navigation, configurable audit profiles, CSV and JSON report export, and commandlet support for automated validation and CI/CD workflows.
+The plugin is designed for interactive editor reviews, repeatable project checks, report generation, and automated validation through the included `PCGAudit` commandlet.
+
+## Product Information
+
+| Field | Value |
+|---|---|
+| Version | 1.0.0 |
+| Unreal Engine | 5.8 |
+| Plugin Type | Editor-only C++ plugin |
+| Required Engine Plugin | Unreal Engine PCG |
+| Supported Platforms | Win64, Linux, Mac |
+| Audit Rules | 24 total: 14 Graph Audit and 10 Component Audit |
+| Report Formats | CSV and JSON |
+
+## Main Capabilities
+
+- Audit the current level, selected PCG actors and components, or selected PCG Graph assets
+- Review 24 focused Graph Audit and Component Audit rules
+- Filter findings by severity, category, and search text
+- Open affected PCG Graphs or focus relevant actors directly from the results
+- Configure Default, Strict, and Relaxed profiles, project thresholds, and individual rules
+- Export the currently visible findings as CSV or versioned JSON
+- Run automated audits through the `PCGAudit` commandlet and CI/CD workflows
+
+Audit operations are read-only. PCG Production Auditor reports and explains findings without automatically modifying PCG Graphs, actors, components, or project content.
 
 ## Requirements
 
 - Unreal Engine 5.8
-- Unreal Engine's built-in PCG plugin enabled
 - PCG Production Auditor enabled
+- Unreal Engine's built-in PCG plugin enabled
 
-PCG Production Auditor is editor-only and does not add a runtime module to packaged games.
-
-## Main Capabilities
-
-- 24 focused audit rules
-- 14 Graph Audit rules
-- 10 Component Audit rules
-- Level and selection-based scans
-- Content Browser support for selected PCG Graph assets
-- Viewport support for selected PCG actors and components
-- Direct navigation to affected graphs and actors
-- Severity, category, and text filters
-- CSV and JSON report export
-- Configurable profiles, thresholds, and per-rule controls
-- `PCGAudit` commandlet for automated validation
+The plugin is editor-only and does not add a runtime module to packaged games.
 
 ## Quick Start
 
-1. Enable Unreal Engine's native PCG plugin.
-2. Enable PCG Production Auditor.
-3. Restart the Unreal Editor if prompted.
-4. Open the PCG Production Auditor editor interface.
-5. Choose **Scan Level** or **Scan Selected**.
-6. Review the generated findings and recommendations.
-7. Double-click Graph Audit findings to open the affected PCG Graph.
-8. Use Component Audit findings to select and focus the affected actor in the viewport.
+1. Enable **PCG Production Auditor** under **Edit → Plugins**.
+2. Restart Unreal Editor when prompted.
+3. Open the Auditor through either entry point:
+   - click the PCG Production Auditor icon in the Level Editor Play toolbar, to the right of the standard Play controls
+   - open **Tools → PCG Production Auditor**
+4. Select **Scan Level** for the currently loaded level or **Scan Selected** for selected actors, components, or PCG Graph assets.
+5. Review the findings, recommendations, and affected targets.
+6. Double-click a Graph Audit finding to open the affected PCG Graph, or use a Component Audit finding to focus the relevant actor.
 
-Audit operations are read-only. The plugin reports and explains findings without automatically modifying PCG Graphs, actors, components, or project content.
+Both entry points open the same dockable **PCG Production Auditor** tab.
 
-## Scan Modes
+For the complete first-use workflow, see [02 — Quick Start](PCGProductionAuditor_Docs/02_Quick_Start.md).
 
-### Scan Level
+## Documentation
 
-Audits supported PCG Components and their referenced graphs in the currently loaded level.
+| Document | Contents |
+|---|---|
+| [Documentation Index](PCGProductionAuditor_Docs/INDEX.md) | Complete navigation and quick-answer guide |
+| [01 — Installation](PCGProductionAuditor_Docs/01_Installation.md) | Requirements, installation, activation, updating, and removal |
+| [02 — Quick Start](PCGProductionAuditor_Docs/02_Quick_Start.md) | First scan, finding review, navigation, and export |
+| [03 — Editor Workflow](PCGProductionAuditor_Docs/03_Editor_Workflow.md) | Interface, scan modes, filters, findings, and direct navigation |
+| [04 — Audit Rule Reference](PCGProductionAuditor_Docs/04_Audit_Rule_Reference.md) | All 24 Graph Audit and Component Audit rules |
+| [05 — Settings and Profiles](PCGProductionAuditor_Docs/05_Settings_And_Profiles.md) | Profiles, thresholds, and per-rule configuration |
+| [06 — Reports and Exports](PCGProductionAuditor_Docs/06_Reports_And_Exports.md) | CSV and JSON behavior, filtering, encoding, and schema overview |
+| [07 — Commandlet and CI/CD](PCGProductionAuditor_Docs/07_Commandlet_And_CI_CD.md) | Command syntax, options, examples, and exit codes |
+| [08 — Troubleshooting](PCGProductionAuditor_Docs/08_Troubleshooting.md) | Common setup, scan, navigation, export, and commandlet problems |
+| [09 — Known Limitations](PCGProductionAuditor_Docs/09_Known_Limitations.md) | Confirmed scope boundaries and experimental behavior |
+| [10 — Changelog](PCGProductionAuditor_Docs/10_Changelog.md) | Public version history |
 
-### Scan Selected
+## Important Notes
 
-Audits the relevant current selection, including:
-
-- Selected PCG actors and components in the viewport
-- Selected PCG Graph assets in the Content Browser
-- Multiple selected PCG Graph assets
-
-Audits can also be started from supported PCG Graph and actor context menus.
-
-## Findings and Navigation
-
-Each finding includes:
-
-- Rule ID and rule name
-- Severity
-- Affected graph, actor, or component
-- Problem description
-- Recommended action
-- Relevant target information
-
-Graph Audit findings can open the affected PCG Graph.
-
-Component Audit findings can select and focus the affected actor in the viewport, including a temporary visual highlight.
-
-## Filters and Search
-
-The editor interface supports:
-
-- Independent Error, Warning, and Info filters
-- Graph Audit and Component Audit filters
-- Search by rule name, target, and problem text
-- Sortable result columns
-- Graph and component summary statistics
-- Level-wide and selection-specific result clearing
-
-A scan-in-progress guard prevents overlapping audit operations.
-
-## Audit Rules
-
-### Graph Audit Rules
-
-- GA-01 — Unconnected Inputs
-- GA-02 — Unconnected/Dead Nodes
-- GA-03 — Disabled Nodes
-- GA-04 — Empty Mesh Selector
-- GA-05 — Duplicate Nodes
-- GA-06 — Circular Subgraph Dependency
-- GA-07 — Hardcoded Seed
-- GA-09 — Read-Before-Write (Experimental)
-- GA-10 — Debug Mode Active
-- GA-11 — Subgraph Missing Input Node
-- GA-12 — Invalid Filter/Empty Data
-- GA-13 — Missing Landscape Connection
-- GA-14 — Missing Output Node
-- GA-15 — Missing Required Pin
-
-`GA-08` is intentionally unused. Rule IDs are kept stable and are not reassigned.
-
-### Component Audit Rules
-
-- CA-01 — Missing Graph
-- CA-02 — Oversized Bounds
-- CA-03 — Bounds Overlap
-- CA-04 — RuntimeGen Component Check
-- CA-05 — Excessive Component Count
-- CA-06 — Component Naming Convention
-- CA-07 — Component Tag Check
-- CA-08 — Invalid Graph Reference
-- CA-09 — Dirty Components
-- CA-10 — Graph Type Mismatch
-
-## Project Settings
-
-Configuration is available under:
-
-**Project Settings → Plugins → PCG Production Auditor**
-
-Available options include:
-
-- Default, Strict, and Relaxed profiles
-- Maximum component bounds threshold
-- Maximum recommended PCG component count
-- Individual enable or disable controls for all 24 audit rules
-
-The same enabled and disabled rule configuration is used by Editor scans and commandlet scans.
-
-## CSV and JSON Reports
-
-The currently visible findings can be exported as CSV or JSON.
-
-Active severity, category, and search filters are respected during export.
-
-### CSV
-
-- UTF-8 output with BOM
-- RFC 4180-compatible field escaping
-
-### JSON
-
-JSON reports use a versioned schema and include:
-
-- `findings_count`
-- `source_plugin`
-- `plugin_version`
-- `engine_version`
-- `timestamp`
-- `scan_mode`
-- `findings`
-
-Editor and commandlet exports use a consistent report structure.
-
-## Commandlet and CI/CD
-
-PCG Production Auditor includes the `PCGAudit` commandlet for automated audits without opening the interactive Unreal Editor.
-
-Example:
-
-```text
-UnrealEditor-Cmd.exe Project.uproject -run=PCGAudit -Map=/Game/Maps/MyLevel -Output=audit.json -Format=json -Rules=GA-01,CA-02 -Severity=Error,Warning
-```
-
-Supported options allow you to:
-
-- Select a map
-- Choose CSV or JSON output
-- Execute specific audit rules
-- Filter reported severity levels
-
-The commandlet respects rules disabled through PCG Production Auditor Project Settings.
-
-### Exit Codes
-
-- `0` — No matching findings
-- `1` — Matching findings were detected
-- `2` — Invalid arguments, map loading failure, or report export failure
-
-## Subgraph-Aware Analysis
-
-Applicable Graph Audit rules account for internal subgraph implementation nodes. This helps keep findings focused on relevant user-authored graph structures instead of treating internally expanded subgraph nodes as normal project issues.
-
-## Current Limitations
-
-- Dead-node analysis detects isolated nodes and immediate dead ends but does not trace complete chained dead branches.
-- Graph findings open the affected PCG Graph but do not focus the exact node inside the Graph Editor.
-- Read-Before-Write analysis is experimental and may require manual review.
-- Editor search covers rule names, targets, and problem text, but not Rule IDs or recommendation text.
-- Scan cancellation is not available in version 1.0.0.
+- `GA-09 — Read-Before-Write` is experimental and its findings should be reviewed manually.
+- Graph findings open the affected PCG Graph but do not focus the exact internal node in version 1.0.0.
+- Export operations include only the findings currently visible after severity, category, and text filters are applied.
+- Rule IDs are stable. `GA-08` is intentionally unused and is not reassigned.
 
 ## Support
 
-- Discord: https://discord.gg/vgpmnN6nCR
-- Email: Tom.Hanke.Official@web.de
-
-For setup questions, bug reports, feature requests, and product support, use the Hanke Unreal Tools Discord or the public support email.
+For setup questions, bug reports, feature requests, and product support, join the [Hanke Unreal Tools Discord](https://discord.gg/vgpmnN6nCR).
 
 ## Copyright
 
