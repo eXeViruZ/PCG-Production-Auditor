@@ -2,6 +2,23 @@
 
 PCG Production Auditor provides one editor interface for reviewing PCG Graph structure and level-side PCG Component configuration.
 
+## Opening the Auditor
+
+Use either entry point:
+
+- click the PCG Production Auditor icon in the Level Editor Play toolbar, to the right of the standard Play controls
+- open **Tools → PCG Production Auditor**
+
+The toolbar button has no visible text label. Its tooltip reads:
+
+**Open PCG Production Auditor — scan graphs and components for production issues**
+
+Both entry points invoke the same dockable tab titled **PCG Production Auditor**.
+
+The tab is a dockable Nomad tab. It can be moved, docked into another editor area, closed, and reopened through either entry point. When the tab is already open, invoking it again focuses the existing tab instead of creating a duplicate.
+
+---
+
 ## Interface Overview
 
 The editor interface includes:
@@ -34,6 +51,8 @@ The scan reviews:
 
 Use this mode for broader level reviews, milestone checks, pre-handoff validation, and repeated quality-control passes.
 
+**Expected result:** The findings list contains all matching Graph Audit and Component Audit results for the enabled rules in the loaded level.
+
 ---
 
 ## Scan Selected
@@ -48,6 +67,8 @@ Supported selection workflows include:
 - multiple selected PCG Graph assets
 
 Use this mode while developing or reviewing a specific graph, actor, or group of graph assets.
+
+**Expected result:** The findings list is limited to the supported current selection.
 
 ---
 
@@ -168,6 +189,20 @@ PCG Production Auditor does not automatically:
 - modify project content based on a finding
 
 The user remains in control of every project change.
+
+---
+
+## Restart and Reopening Behavior
+
+The tab spawner and menu extensions are registered during plugin startup.
+
+After restarting Unreal Editor:
+
+- the toolbar icon is registered again
+- **Tools → PCG Production Auditor** is registered again
+- the tab can be reopened through either entry point
+
+No user-created temporary state is required for the entry points to return after restart.
 
 ---
 
