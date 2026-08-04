@@ -13,15 +13,32 @@ Confirm:
 
 ---
 
+## Open PCG Production Auditor
+
+Use either confirmed entry point:
+
+- click the PCG Production Auditor icon in the Level Editor Play toolbar, to the right of the standard Play controls
+- open **Tools → PCG Production Auditor**
+
+The toolbar button has no text label. Its tooltip reads:
+
+**Open PCG Production Auditor — scan graphs and components for production issues**
+
+Both entry points open the same dockable tab titled **PCG Production Auditor**.
+
+---
+
 ## Run a Level Audit
 
-1. Open the **PCG Production Auditor** editor tab from the plugin toolbar entry.
+1. Open **PCG Production Auditor**.
 2. Select **Scan Level**.
 3. Wait for the scan to complete.
 4. Review the summary counts for Errors, Warnings, and Info findings.
 5. Select a finding to read its problem description and recommended action.
 
 **Scan Level** audits supported PCG Components in the currently loaded level and the PCG Graphs referenced by those components.
+
+**Expected result:** The result list displays all findings produced by the enabled rules for the current level.
 
 ---
 
@@ -38,11 +55,13 @@ Supported selections include:
 Steps:
 
 1. Select the relevant actors, components, or graph assets.
-2. Open PCG Production Auditor.
+2. Open **PCG Production Auditor** through the toolbar icon or **Tools → PCG Production Auditor**.
 3. Select **Scan Selected**.
 4. Review the generated findings.
 
 Supported audits can also be started from PCG Graph and actor context menus.
+
+**Expected result:** Only findings related to the supported current selection are added to the result list.
 
 ---
 
