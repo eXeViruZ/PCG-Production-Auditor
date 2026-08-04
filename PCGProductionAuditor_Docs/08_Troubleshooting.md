@@ -213,7 +213,11 @@ Allow the current scan to finish. The scan-in-progress guard prevents a second o
 
 ## Still Not Working?
 
-When reporting a problem on the [Hanke Unreal Tools Discord](https://discord.gg/vgpmnN6nCR), include:
+Use the [Hanke Unreal Tools Discord](https://discord.gg/vgpmnN6nCR) for bug reports, setup questions, feature requests, and community support.
+
+For direct or individual support, contact [Tom.Hanke.Official@web.de](mailto:Tom.Hanke.Official@web.de).
+
+Include:
 
 - Unreal Engine version
 - PCG Production Auditor version
