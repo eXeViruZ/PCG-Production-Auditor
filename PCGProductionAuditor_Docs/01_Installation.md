@@ -11,6 +11,8 @@
 
 PCG Production Auditor does not require engine modifications or third-party software.
 
+The native Unreal Engine **PCG** plugin is declared as a plugin dependency and is activated with PCG Production Auditor when required.
+
 ---
 
 ## Option A — Install from Fab
@@ -19,9 +21,8 @@ PCG Production Auditor does not require engine modifications or third-party soft
 2. Install the Unreal Engine 5.8 version through the Epic Games Launcher or Fab integration.
 3. Open your Unreal Engine 5.8 project.
 4. Open **Edit → Plugins**.
-5. Enable Unreal Engine's built-in **PCG** plugin.
-6. Enable **PCG Production Auditor**.
-7. Restart Unreal Editor when prompted.
+5. Enable **PCG Production Auditor**.
+6. Restart Unreal Editor when prompted.
 
 ---
 
@@ -36,7 +37,7 @@ PCG Production Auditor does not require engine modifications or third-party soft
 
 3. Confirm the plugin descriptor is inside the copied plugin folder.
 4. Reopen the project.
-5. Enable Unreal Engine's built-in **PCG** plugin.
+5. Open **Edit → Plugins**.
 6. Enable **PCG Production Auditor**.
 7. Restart Unreal Editor when prompted.
 
@@ -49,10 +50,15 @@ For C++ projects, regenerate project files and rebuild when Unreal requests it.
 After restarting the editor:
 
 1. Confirm **PCG Production Auditor** is enabled under **Edit → Plugins**.
-2. Confirm the built-in **PCG** plugin is enabled.
-3. Open the PCG Production Auditor editor tab from the plugin's toolbar entry.
-4. Confirm the interface opens without an error.
-5. Load a level containing at least one PCG Component or select a PCG Graph asset for the first test scan.
+2. Confirm the native Unreal Engine **PCG** plugin is enabled.
+3. Open the Auditor through either confirmed entry point:
+   - click the PCG Production Auditor icon in the Level Editor Play toolbar, to the right of the standard Play controls; its tooltip reads **Open PCG Production Auditor — scan graphs and components for production issues**
+   - open **Tools → PCG Production Auditor**
+4. Confirm the dockable tab opens with the title **PCG Production Auditor**.
+5. Close the tab and reopen it through either entry point.
+6. Load a level containing at least one PCG Component or select a PCG Graph asset for the first test scan.
+
+Both entry points open the same dockable editor tab.
 
 Continue with [02 — Quick Start](02_Quick_Start.md).
 
@@ -90,7 +96,8 @@ Previously exported CSV and JSON files remain normal external report files and c
 
 See [08 — Troubleshooting](08_Troubleshooting.md) when:
 
-- the toolbar entry is missing
+- the toolbar icon is missing
+- the **Tools → PCG Production Auditor** entry is missing
 - the plugin does not load
 - Unreal reports a version mismatch
 - the editor tab does not open
