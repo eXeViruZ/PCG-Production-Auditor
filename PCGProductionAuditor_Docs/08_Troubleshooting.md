@@ -6,38 +6,85 @@ This page applies to PCG Production Auditor version 1.0.0 for Unreal Engine 5.8.
 
 **Symptom:** Unreal reports that PCG Production Auditor cannot be loaded.
 
-**Checks:**
+**Likely causes:**
+
+- the project is not using Unreal Engine 5.8
+- the plugin folder is nested incorrectly
+- a C++ project requires regenerated project files or a rebuild
+- stale build folders are interfering with the current plugin build
+
+**Resolution:**
 
 1. Confirm the project uses Unreal Engine 5.8.
-2. Confirm Unreal Engine's built-in PCG plugin is enabled.
-3. Confirm the plugin folder is not nested incorrectly.
-4. For a C++ project, regenerate project files and rebuild.
-5. Remove stale project or plugin `Binaries` and `Intermediate` folders before rebuilding when necessary.
+2. Confirm **PCG Production Auditor** is enabled under **Edit → Plugins**.
+3. Confirm Unreal Engine's native **PCG** plugin is enabled.
+4. Confirm the plugin folder is not nested incorrectly.
+5. For a C++ project, regenerate project files and rebuild.
+6. Remove stale project or plugin `Binaries` and `Intermediate` folders before rebuilding when necessary.
 
-## The Toolbar Entry Is Missing
+**Expected result:** The project opens and the plugin registers its toolbar icon, Tools menu entry, and dockable tab.
 
-**Symptom:** The PCG Production Auditor toolbar entry is not visible.
+## The Toolbar Icon Is Missing
 
-**Checks:**
+**Symptom:** The PCG Production Auditor icon is not visible in the Level Editor Play toolbar.
+
+The expected location is to the right of the standard Play controls. The button has no text label. Its tooltip is:
+
+**Open PCG Production Auditor — scan graphs and components for production issues**
+
+**Resolution:**
 
 1. Confirm the plugin is enabled under **Edit → Plugins**.
-2. Confirm the built-in PCG plugin is enabled.
+2. Confirm the native PCG plugin is enabled.
 3. Restart Unreal Editor.
-4. Check the Output Log for plugin startup errors.
-5. Reset or reopen the relevant editor toolbar area when the editor layout has been customized.
+4. Check **Tools → PCG Production Auditor** as the alternative entry point.
+5. Check the Output Log for plugin startup or menu-registration errors.
+6. Reset or reopen the relevant editor toolbar area when the editor layout has been customized.
+
+**Expected result:** The icon appears in the Play toolbar and opens the **PCG Production Auditor** tab.
+
+## The Tools Menu Entry Is Missing
+
+**Symptom:** **Tools → PCG Production Auditor** is not available.
+
+**Resolution:**
+
+1. Confirm the plugin is enabled under **Edit → Plugins**.
+2. Confirm the native PCG plugin is enabled.
+3. Restart Unreal Editor.
+4. Check whether the toolbar icon is available.
+5. Check the Output Log for startup or ToolMenus registration errors.
+
+There is no separate **Window → PCG Production Auditor** entry in version 1.0.0.
+
+**Expected result:** **Tools → PCG Production Auditor** opens the same dockable tab as the toolbar icon.
+
+## The Tab Does Not Open
+
+**Symptom:** The toolbar icon or Tools menu entry is visible, but the Auditor tab does not appear.
+
+**Resolution:**
+
+1. Invoke the tab again through **Tools → PCG Production Auditor**.
+2. Check whether the tab is already docked or hidden in another editor area.
+3. Reset the Unreal Editor layout when a previously saved layout places the tab off-screen.
+4. Check the Output Log for tab-spawner or Slate errors.
+5. Restart Unreal Editor and try both entry points again.
+
+**Expected result:** A dockable tab titled **PCG Production Auditor** opens or receives focus.
 
 ## Scan Level Returns No Findings
 
 **Symptom:** The scan completes but the result list is empty.
 
-**Checks:**
+**Resolution:**
 
 1. Confirm the current level contains supported PCG Components.
 2. Confirm the components reference PCG Graphs where required.
 3. Confirm relevant audit rules are enabled in Project Settings.
 4. Enable all severity and category filters.
 5. Clear the text search field.
-6. Confirm the level is the intended currently loaded level.
+6. Confirm the intended level is currently loaded.
 
 An empty result can also mean no enabled rule detected a matching condition.
 
@@ -45,7 +92,7 @@ An empty result can also mean no enabled rule detected a matching condition.
 
 **Symptom:** A selection scan completes without expected results.
 
-**Checks:**
+**Resolution:**
 
 1. Select a supported PCG actor or component in the viewport, or a PCG Graph asset in the Content Browser.
 2. For graph assets, confirm the selected assets are PCG Graphs.
@@ -57,7 +104,7 @@ An empty result can also mean no enabled rule detected a matching condition.
 
 **Symptom:** A known finding is not visible after a scan.
 
-**Checks:**
+**Resolution:**
 
 1. Enable Error, Warning, and Info filters.
 2. Enable Graph Audit and Component Audit filters.
@@ -77,7 +124,7 @@ Use the finding's rule, target, problem description, and recommendation to locat
 
 ## A Component Finding Does Not Focus the Expected Actor
 
-**Checks:**
+**Resolution:**
 
 1. Confirm the actor still exists in the current level.
 2. Confirm the finding belongs to the currently loaded level state.
@@ -106,7 +153,7 @@ Open or import the file using UTF-8 in the target spreadsheet application. Avoid
 
 ## JSON Processing Fails
 
-**Checks:**
+**Resolution:**
 
 1. Confirm the file is complete and not empty.
 2. Confirm the consumer expects UTF-8 without BOM.
@@ -136,7 +183,7 @@ Check the project path, map path, output path, requested format, command-line sp
 
 ## A Requested Rule Does Not Run in the Commandlet
 
-**Checks:**
+**Resolution:**
 
 1. Confirm the Rule ID is written correctly.
 2. Confirm the rule is enabled in Project Settings.
@@ -164,19 +211,20 @@ Scan cancellation is not available in version 1.0.0.
 
 Allow the current scan to finish. The scan-in-progress guard prevents a second overlapping audit from starting.
 
-## Support Information
+## Still Not Working?
 
 When reporting a problem on the [Hanke Unreal Tools Discord](https://discord.gg/vgpmnN6nCR), include:
 
 - Unreal Engine version
 - PCG Production Auditor version
-- scan mode
-- affected Rule ID
+- operating system
+- scan mode or opening method
+- affected Rule ID, when relevant
 - relevant graph or component setup
 - reproduction steps
 - expected result
 - actual result
-- screenshots or report files when useful
+- screenshots, Output Log lines, or exported reports when useful
 
 ---
 
